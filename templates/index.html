@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Photo 4×6 Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📷 Passport Photo 4×6 Generator</h1>
+            <p>Upload your photo and get print-ready 4×6 passport size photos</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section id="upload-section" class="section">
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" hidden>
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17,8 12,3 7,8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <p class="upload-text">Click to upload or drag and drop</p>
+                        <p class="upload-hint">JPG, PNG, WEBP (Max 5MB)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Crop Section -->
+            <section id="crop-section" class="section hidden">
+                <h2>Adjust Crop Area</h2>
+                <p class="crop-hint">Drag the box to move, drag corners/edges to resize</p>
+                <div class="crop-container">
+                    <div class="crop-wrapper" id="crop-wrapper">
+                        <img id="crop-image" alt="Crop" draggable="false">
+                        <div class="crop-overlay" id="crop-overlay">
+                            <div class="crop-box" id="crop-box">
+                                <div class="crop-guide-v"></div>
+                                <div class="crop-guide-h"></div>
+                                <div class="crop-label">35mm × 45mm</div>
+                                <!-- Resize handles -->
+                                <div class="crop-handle crop-handle-tl" data-handle="tl"></div>
+                                <div class="crop-handle crop-handle-tr" data-handle="tr"></div>
+                                <div class="crop-handle crop-handle-bl" data-handle="bl"></div>
+                                <div class="crop-handle crop-handle-br" data-handle="br"></div>
+                                <div class="crop-handle crop-handle-t" data-handle="t"></div>
+                                <div class="crop-handle crop-handle-b" data-handle="b"></div>
+                                <div class="crop-handle crop-handle-l" data-handle="l"></div>
+                                <div class="crop-handle crop-handle-r" data-handle="r"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="crop-button-wrapper">
+                    <div class="button-group">
+                        <button id="crop-done-btn" class="btn btn-primary">Done</button>
+                        <button id="crop-auto-btn" class="btn btn-secondary">Auto Detect</button>
+                        <button id="crop-cancel-btn" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section id="preview-section" class="section hidden">
+                <h2>Crop Preview</h2>
+                <div class="preview-container">
+                    <canvas id="crop-preview-canvas"></canvas>
+                </div>
+                
+                <!-- Background Color Selection -->
+                <div class="bg-selection">
+                    <label>Background Color:</label>
+                    <div class="color-options">
+                        <label class="color-option">
+                            <input type="radio" name="bg-color" value="white" checked>
+                            <span class="color-box white"></span>
+                            <span>White</span>
+                        </label>
+                        <label class="color-option">
+                            <input type="radio" name="bg-color" value="blue">
+                            <span class="color-box blue"></span>
+                            <span>Light Blue</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button id="generate-btn" class="btn btn-success">
+                        <span class="btn-text">Generate Passport Photo</span>
+                        <span class="spinner hidden"></span>
+                    </button>
+                    <button id="adjust-crop-btn" class="btn btn-primary">Adjust Crop</button>
+                    <button id="change-photo-btn" class="btn btn-secondary">Change Photo</button>
+                </div>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-section" class="section hidden">
+                <div class="loading-container">
+                    <div class="spinner-large"></div>
+                    <p>Processing your photo...</p>
+                    <p class="sub-text">Removing background & generating layout</p>
+                </div>
+            </section>
+
+            <!-- Result Section -->
+            <section id="result-section" class="section hidden">
+                <h2>Your 4×6 Passport Photo Sheet</h2>
+                <p class="info-text">Print-ready at 300 DPI (4×6 inches)</p>
+                <div class="result-container">
+                    <img id="result-image" alt="Passport Photo Sheet">
+                </div>
+                <div class="button-group">
+                    <button id="download-btn" class="btn btn-success">Download (JPG)</button>
+                    <button id="new-photo-btn" class="btn btn-secondary">Create New</button>
+                </div>
+                
+            </section>
+
+            <!-- Error Section -->
+            <section id="error-section" class="section hidden">
+                <div class="error-container">
+                    <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                    <p id="error-message">Something went wrong</p>
+                    <button id="try-again-btn" class="btn btn-secondary">Try Again</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>✨ Fast processing • Print-ready output • Free to use</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
