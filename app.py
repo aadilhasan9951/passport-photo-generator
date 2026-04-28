@@ -17,6 +17,16 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# Preload rembg model at startup to prevent timeout during requests
+print("Preloading rembg model...")
+try:
+    from rembg import new_session
+    session = new_session('u2net')
+    print("Rembg model loaded successfully")
+except Exception as e:
+    print(f"Error loading rembg model: {e}")
+    session = None
+
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max file size
 
 def allowed_file(filename):
@@ -127,7 +137,10 @@ def upload_image():
         # Step 2: Remove background from cropped image
         if cropped_img.mode != 'RGBA':
             cropped_img = cropped_img.convert('RGBA')
-        img_no_bg = remove(cropped_img)
+        if session:
+            img_no_bg = remove(cropped_img, session=session)
+        else:
+            img_no_bg = remove(cropped_img)
         
         # Step 3: Apply solid background
         if bg_color == 'blue':
@@ -253,7 +266,10 @@ def generate():
             input_image = input_image.convert('RGBA')
         
         # Step 1: Remove background
-        img_no_bg = remove(input_image)
+        if session:
+            img_no_bg = remove(input_image, session=session)
+        else:
+            img_no_bg = remove(input_image)
         
         # Step 2: Apply solid background
         if bg_color == 'blue':
@@ -356,7 +372,10 @@ def generate_android():
             input_image = input_image.convert('RGBA')
         
         # Step 1: Remove background
-        img_no_bg = remove(input_image)
+        if session:
+            img_no_bg = remove(input_image, session=session)
+        else:
+            img_no_bg = remove(input_image)
         
         # Step 2: Apply solid background
         if bg_color == 'blue':
