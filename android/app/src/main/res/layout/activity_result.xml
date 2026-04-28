@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f5f5"
+    android:background="@drawable/gradient_background"
     tools:context=".ResultActivity">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:text="Your 4×6 Passport Photo Sheet"
         android:textSize="20sp"
-        android:textColor="#333"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:layout_marginEnd="16dp"
         android:text="Print-ready at 300 DPI (4×6 inches)"
         android:textSize="14sp"
-        android:textColor="#667eea"
+        android:textColor="@android:color/white"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
             android:layout_height="56dp"
             android:text="Create New"
             android:backgroundTint="#f1f1f1"
-            android:textColor="#333"
+            android:textColor="@android:color/white"
             android:textSize="16sp" />
 
     </LinearLayout>

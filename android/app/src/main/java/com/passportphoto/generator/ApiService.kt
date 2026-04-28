@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 
-class ApiService(private val serverUrl: String = "https://your-app-name.onrender.com") {
+class ApiService(private val serverUrl: String = "https://passport-photo-generator-production-64b2.up.railway.app") {
     
     private val client = OkHttpClient()
     

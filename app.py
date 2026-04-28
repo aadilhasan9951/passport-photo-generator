@@ -145,8 +145,16 @@ def upload_image():
         # Step 3: Apply solid background
         if bg_color == 'blue':
             bg_rgb = (3, 152, 252)  # Light blue
+        elif bg_color == 'gray':
+            bg_rgb = (220, 220, 220)  # Light gray
+        elif bg_color == 'cream':
+            bg_rgb = (255, 248, 220)  # Cream/beige
+        elif bg_color == 'pink':
+            bg_rgb = (255, 228, 225)  # Light pink
+        elif bg_color == 'green':
+            bg_rgb = (230, 255, 240)  # Mint green
         else:
-            bg_rgb = (255, 255, 255)  # White
+            bg_rgb = (255, 255, 255)  # White (default)
         
         # Create background image
         bg_image = Image.new('RGBA', img_no_bg.size, bg_rgb + (255,))
@@ -274,8 +282,16 @@ def generate():
         # Step 2: Apply solid background
         if bg_color == 'blue':
             bg_rgb = (3, 152, 252)  # Light blue
+        elif bg_color == 'gray':
+            bg_rgb = (220, 220, 220)  # Light gray
+        elif bg_color == 'cream':
+            bg_rgb = (255, 248, 220)  # Cream/beige
+        elif bg_color == 'pink':
+            bg_rgb = (255, 228, 225)  # Light pink
+        elif bg_color == 'green':
+            bg_rgb = (230, 255, 240)  # Mint green
         else:
-            bg_rgb = (255, 255, 255)  # White
+            bg_rgb = (255, 255, 255)  # White (default)
         
         # Create background image
         bg_image = Image.new('RGBA', img_no_bg.size, bg_rgb + (255,))
@@ -388,8 +404,16 @@ def generate_android():
         # Step 2: Apply solid background
         if bg_color == 'blue':
             bg_rgb = (3, 152, 252)  # Light blue
+        elif bg_color == 'gray':
+            bg_rgb = (220, 220, 220)  # Light gray
+        elif bg_color == 'cream':
+            bg_rgb = (255, 248, 220)  # Cream/beige
+        elif bg_color == 'pink':
+            bg_rgb = (255, 228, 225)  # Light pink
+        elif bg_color == 'green':
+            bg_rgb = (230, 255, 240)  # Mint green
         else:
-            bg_rgb = (255, 255, 255)  # White
+            bg_rgb = (255, 255, 255)  # White (default)
         
         # Create background image
         bg_image = Image.new('RGBA', img_no_bg.size, bg_rgb + (255,))

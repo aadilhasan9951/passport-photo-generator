@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.canhub.cropper.CropImageView
 import java.io.File
+import java.io.FileOutputStream
 
 class CropActivity : AppCompatActivity() {
 
@@ -67,19 +68,17 @@ class CropActivity : AppCompatActivity() {
     
     private fun saveBitmapToTempFile(bitmap: Bitmap): Uri {
         val filename = "cropped_photo_${System.currentTimeMillis()}.jpg"
-        val contentValues = android.content.ContentValues().apply {
-            put(android.provider.MediaStore.Images.Media.DISPLAY_NAME, filename)
-            put(android.provider.MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            put(android.provider.MediaStore.Images.Media.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES)
-        }
+        val tempFile = File(cacheDir, filename)
         
-        val uri = contentResolver.insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-        uri?.let {
-            val stream = contentResolver.openOutputStream(it)
-            stream?.use {
-                bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, it)
-            }
-        }
-        return uri!!
+        val outputStream = FileOutputStream(tempFile)
+        bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+        
+        return androidx.core.content.FileProvider.getUriForFile(
+            this,
+            "com.passportphoto.generator.fileprovider",
+            tempFile
+        )
     }
 }

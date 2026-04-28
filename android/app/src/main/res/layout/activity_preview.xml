@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f5f5f5"
+    android:background="@drawable/gradient_background"
     tools:context=".PreviewActivity">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginEnd="16dp"
         android:text="Crop Preview"
         android:textSize="20sp"
-        android:textColor="#333"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,7 @@
         android:layout_marginTop="16dp"
         android:text="Background Color:"
         android:textSize="16sp"
-        android:textColor="#333"
+        android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,6 +76,38 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Light Blue"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbGray"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Light Gray"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbCream"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cream"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbPink"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Light Pink"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbGreen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mint"
             android:textSize="16sp" />
 
     </RadioGroup>
@@ -115,7 +147,7 @@
             android:layout_height="56dp"
             android:text="Change Photo"
             android:backgroundTint="#f1f1f1"
-            android:textColor="#333"
+            android:textColor="@android:color/white"
             android:textSize="16sp" />
 
     </LinearLayout>

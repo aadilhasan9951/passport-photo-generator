@@ -20,6 +20,10 @@ class PreviewActivity : AppCompatActivity() {
     private lateinit var rgBgColor: RadioGroup
     private lateinit var rbWhite: RadioButton
     private lateinit var rbBlue: RadioButton
+    private lateinit var rbGray: RadioButton
+    private lateinit var rbCream: RadioButton
+    private lateinit var rbPink: RadioButton
+    private lateinit var rbGreen: RadioButton
     private lateinit var btnGenerate: Button
     private lateinit var btnAdjustCrop: Button
     private lateinit var btnChangePhoto: Button
@@ -35,6 +39,10 @@ class PreviewActivity : AppCompatActivity() {
         rgBgColor = findViewById(R.id.rgBgColor)
         rbWhite = findViewById(R.id.rbWhite)
         rbBlue = findViewById(R.id.rbBlue)
+        rbGray = findViewById(R.id.rbGray)
+        rbCream = findViewById(R.id.rbCream)
+        rbPink = findViewById(R.id.rbPink)
+        rbGreen = findViewById(R.id.rbGreen)
         btnGenerate = findViewById(R.id.btnGenerate)
         btnAdjustCrop = findViewById(R.id.btnAdjustCrop)
         btnChangePhoto = findViewById(R.id.btnChangePhoto)
@@ -72,7 +80,15 @@ class PreviewActivity : AppCompatActivity() {
         Toast.makeText(this, "Generating passport photo...", Toast.LENGTH_SHORT).show()
         
         // Get selected background color
-        val bgColor = if (rbWhite.isChecked) "white" else "blue"
+        val bgColor = when {
+            rbWhite.isChecked -> "white"
+            rbBlue.isChecked -> "blue"
+            rbGray.isChecked -> "gray"
+            rbCream.isChecked -> "cream"
+            rbPink.isChecked -> "pink"
+            rbGreen.isChecked -> "green"
+            else -> "white"
+        }
         
         // Call API for accurate background removal
         val apiService = ApiService()
@@ -97,19 +113,17 @@ class PreviewActivity : AppCompatActivity() {
     
     private fun saveBitmapToTempFile(bitmap: Bitmap): Uri {
         val filename = "passport_layout_${System.currentTimeMillis()}.jpg"
-        val contentValues = android.content.ContentValues().apply {
-            put(android.provider.MediaStore.Images.Media.DISPLAY_NAME, filename)
-            put(android.provider.MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            put(android.provider.MediaStore.Images.Media.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES)
-        }
+        val tempFile = File(cacheDir, filename)
         
-        val uri = contentResolver.insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-        uri?.let {
-            val stream = contentResolver.openOutputStream(it)
-            stream?.use {
-                bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 95, it)
-            }
-        }
-        return uri!!
+        val outputStream = FileOutputStream(tempFile)
+        bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 95, outputStream)
+        outputStream.flush()
+        outputStream.close()
+        
+        return androidx.core.content.FileProvider.getUriForFile(
+            this,
+            "com.passportphoto.generator.fileprovider",
+            tempFile
+        )
     }
 }

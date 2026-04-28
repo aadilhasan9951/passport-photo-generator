@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
 
@@ -82,7 +83,11 @@ class MainActivity : AppCompatActivity() {
     private fun openCamera() {
         val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
         val tempFile = File(externalCacheDir, "temp_camera_photo.jpg")
-        val photoUri = android.net.Uri.fromFile(tempFile)
+        val photoUri = androidx.core.content.FileProvider.getUriForFile(
+            this,
+            "com.passportphoto.generator.fileprovider",
+            tempFile
+        )
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri)
         startActivityForResult(intent, CAMERA_REQUEST_CODE)
     }
@@ -103,9 +108,13 @@ class MainActivity : AppCompatActivity() {
                 CAMERA_REQUEST_CODE -> {
                     val tempFile = File(externalCacheDir, "temp_camera_photo.jpg")
                     if (tempFile.exists()) {
-                        val tempUri = android.net.Uri.fromFile(tempFile)
+                        val photoUri = androidx.core.content.FileProvider.getUriForFile(
+                            this,
+                            "com.passportphoto.generator.fileprovider",
+                            tempFile
+                        )
                         val cropIntent = Intent(this, CropActivity::class.java)
-                        cropIntent.putExtra("imageUri", tempUri.toString())
+                        cropIntent.putExtra("imageUri", photoUri.toString())
                         startActivity(cropIntent)
                     }
                 }
@@ -134,19 +143,17 @@ class MainActivity : AppCompatActivity() {
     
     private fun saveBitmapToTempFile(bitmap: android.graphics.Bitmap): Uri {
         val filename = "temp_photo_${System.currentTimeMillis()}.jpg"
-        val contentValues = android.content.ContentValues().apply {
-            put(MediaStore.Images.Media.DISPLAY_NAME, filename)
-            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-            put(MediaStore.Images.Media.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES)
-        }
+        val tempFile = File(cacheDir, filename)
         
-        val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-        uri?.let {
-            val stream = contentResolver.openOutputStream(it)
-            stream?.use {
-                bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, it)
-            }
-        }
-        return uri!!
+        val outputStream = FileOutputStream(tempFile)
+        bitmap.compress(android.graphics.Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream.flush()
+        outputStream.close()
+        
+        return androidx.core.content.FileProvider.getUriForFile(
+            this,
+            "com.passportphoto.generator.fileprovider",
+            tempFile
+        )
     }
 }
