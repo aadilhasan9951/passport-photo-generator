@@ -151,8 +151,8 @@ def upload_image():
         layout_width = 1200  # 4 inches * 300 DPI (now width)
         layout_height = 1800  # 6 inches * 300 DPI (now height)
         
-        passport_width = 413  # 35mm at 300 DPI
-        passport_height = 531  # 45mm at 300 DPI
+        passport_width = 300  # Much smaller to ensure visible gaps
+        passport_height = 400  # Much smaller to ensure visible gaps
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
@@ -183,9 +183,24 @@ def upload_image():
         cols = 2
         rows = 4
         
-        # Calculate spacing
-        margin_x = (layout_width - (cols * passport_width)) // (cols + 1)
-        margin_y = (layout_height - (rows * passport_height)) // (rows + 1)
+        # Calculate spacing with extra gap between photos
+        # Add minimum 20px gap between photos (border to border)
+        min_gap = 20
+        
+        # Calculate available space for gaps
+        total_photo_width = cols * passport_width
+        total_photo_height = rows * passport_height
+        
+        available_width = layout_width - total_photo_width
+        available_height = layout_height - total_photo_height
+        
+        # Distribute gaps evenly between photos and edges
+        margin_x = available_width // (cols + 1)
+        margin_y = available_height // (rows + 1)
+        
+        # Ensure minimum gap
+        margin_x = max(min_gap, margin_x)
+        margin_y = max(min_gap, margin_y)
         
         # Paste photos in grid
         for row in range(rows):
