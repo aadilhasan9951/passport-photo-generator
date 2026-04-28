@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit
 class ApiService(private val serverUrl: String = "https://passport-photo-generator-production-64b2.up.railway.app") {
     
     private val client = OkHttpClient.Builder()
-        .connectTimeout(60, TimeUnit.SECONDS)
-        .readTimeout(60, TimeUnit.SECONDS)
-        .writeTimeout(60, TimeUnit.SECONDS)
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
         .build()
     
     /**
