@@ -9,10 +9,15 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class ApiService(private val serverUrl: String = "https://passport-photo-generator-production-64b2.up.railway.app") {
     
-    private val client = OkHttpClient()
+    private val client = OkHttpClient.Builder()
+        .connectTimeout(60, TimeUnit.SECONDS)
+        .readTimeout(60, TimeUnit.SECONDS)
+        .writeTimeout(60, TimeUnit.SECONDS)
+        .build()
     
     /**
      * Generate passport photo by calling Flask backend
@@ -21,6 +26,10 @@ class ApiService(private val serverUrl: String = "https://passport-photo-generat
      * @return Generated layout bitmap
      */
     fun generatePassportPhoto(bitmap: Bitmap, bgColor: String, callback: (Bitmap?) -> Unit) {
+        generatePassportPhotoWithRetry(bitmap, bgColor, callback, retryCount = 0)
+    }
+    
+    private fun generatePassportPhotoWithRetry(bitmap: Bitmap, bgColor: String, callback: (Bitmap?) -> Unit, retryCount: Int) {
         // Convert bitmap to file
         val tempFile = bitmapToTempFile(bitmap)
         
@@ -39,7 +48,12 @@ class ApiService(private val serverUrl: String = "https://passport-photo-generat
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                callback(null)
+                // Retry once on failure
+                if (retryCount < 1) {
+                    generatePassportPhotoWithRetry(bitmap, bgColor, callback, retryCount + 1)
+                } else {
+                    callback(null)
+                }
             }
             
             override fun onResponse(call: Call, response: Response) {
@@ -48,7 +62,12 @@ class ApiService(private val serverUrl: String = "https://passport-photo-generat
                     val resultBitmap = BitmapFactory.decodeByteArray(responseBody, 0, responseBody?.size ?: 0)
                     callback(resultBitmap)
                 } else {
-                    callback(null)
+                    // Retry once on failure
+                    if (retryCount < 1) {
+                        generatePassportPhotoWithRetry(bitmap, bgColor, callback, retryCount + 1)
+                    } else {
+                        callback(null)
+                    }
                 }
             }
         })
