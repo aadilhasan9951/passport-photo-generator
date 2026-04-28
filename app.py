@@ -290,8 +290,8 @@ def generate():
         layout_width = 1200
         layout_height = 1800
         
-        passport_width = 413
-        passport_height = 531
+        passport_width = 300
+        passport_height = 400
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
@@ -320,8 +320,16 @@ def generate():
         cols = 2
         rows = 4
         
-        margin_x = (layout_width - (cols * passport_width)) // (cols + 1)
-        margin_y = (layout_height - (rows * passport_height)) // (rows + 1)
+        # Calculate spacing with minimum gap between photos
+        min_gap = 20
+        total_photo_width = cols * passport_width
+        total_photo_height = rows * passport_height
+        available_width = layout_width - total_photo_width
+        available_height = layout_height - total_photo_height
+        margin_x = available_width // (cols + 1)
+        margin_y = available_height // (rows + 1)
+        margin_x = max(min_gap, margin_x)
+        margin_y = max(min_gap, margin_y)
         
         # Paste photos in grid
         for row in range(rows):
@@ -396,8 +404,8 @@ def generate_android():
         layout_width = 1200
         layout_height = 1800
         
-        passport_width = 413
-        passport_height = 531
+        passport_width = 300
+        passport_height = 400
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
@@ -426,8 +434,16 @@ def generate_android():
         cols = 2
         rows = 4
         
-        margin_x = (layout_width - (cols * passport_width)) // (cols + 1)
-        margin_y = (layout_height - (rows * passport_height)) // (rows + 1)
+        # Calculate spacing with minimum gap between photos
+        min_gap = 20
+        total_photo_width = cols * passport_width
+        total_photo_height = rows * passport_height
+        available_width = layout_width - total_photo_width
+        available_height = layout_height - total_photo_height
+        margin_x = available_width // (cols + 1)
+        margin_y = available_height // (rows + 1)
+        margin_x = max(min_gap, margin_x)
+        margin_y = max(min_gap, margin_y)
         
         # Paste photos in grid
         for row in range(rows):
