@@ -79,35 +79,27 @@
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/rbGray"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Light Gray"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/rbCream"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cream"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/rbPink"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Light Pink"
-            android:textSize="16sp" />
-
-        <RadioButton
             android:id="@+id/rbGreen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Mint"
+            android:text="Green"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbPurple"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Purple"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbRed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Red"
             android:textSize="16sp" />
 
     </RadioGroup>
