@@ -78,30 +78,6 @@
             android:text="Light Blue"
             android:textSize="14sp" />
 
-        <RadioButton
-            android:id="@+id/rbGreen"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Green"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/rbPurple"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Purple"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/rbRed"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Red"
-            android:textSize="14sp" />
-
     </RadioGroup>
 
     <LinearLayout

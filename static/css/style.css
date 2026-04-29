@@ -183,21 +183,6 @@ main {
     border-color: rgb(2, 120, 200);
 }
 
-.color-box.green {
-    background: linear-gradient(145deg, rgb(190, 252, 3), rgb(170, 232, 3));
-    border-color: rgb(150, 212, 3);
-}
-
-.color-box.purple {
-    background: linear-gradient(145deg, rgb(242, 114, 223), rgb(222, 94, 203));
-    border-color: rgb(202, 74, 183);
-}
-
-.color-box.red {
-    background: linear-gradient(145deg, rgb(230, 96, 96), rgb(210, 76, 76));
-    border-color: rgb(190, 56, 56);
-}
-
 .color-option input:checked + .color-box {
     border-color: #667eea;
     border-width: 5px;

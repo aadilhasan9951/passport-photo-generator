@@ -8,8 +8,8 @@ class PhotoLayoutGenerator {
     
     companion object {
         // Passport photo dimensions at 300 DPI
-        private const val PASSPORT_WIDTH = 300  // Much smaller to ensure visible gaps
-        private const val PASSPORT_HEIGHT = 400  // Much smaller to ensure visible gaps
+        private const val PASSPORT_WIDTH = 280  // Standard passport size
+        private const val PASSPORT_HEIGHT = 380  // Standard passport size
         
         // 4x6 inch layout at 300 DPI (portrait)
         private const val LAYOUT_WIDTH = 1200   // 4 inches
@@ -50,8 +50,8 @@ class PhotoLayoutGenerator {
             val photoHeight = borderedPhoto.height
             
             // Calculate spacing with extra gap between photos
-            // Add minimum 20px gap between photos (border to border)
-            val minGap = 20
+            // Add minimum 10px gap between photos (border to border)
+            val minGap = 10
             
             // Calculate available space for gaps
             val totalPhotoWidth = cols * photoWidth

@@ -145,12 +145,6 @@ def upload_image():
         # Step 3: Apply solid background
         if bg_color == 'blue':
             bg_rgb = (3, 152, 252)  # Light blue
-        elif bg_color == 'green':
-            bg_rgb = (190, 252, 3)  # Green
-        elif bg_color == 'purple':
-            bg_rgb = (242, 114, 223)  # Purple
-        elif bg_color == 'red':
-            bg_rgb = (230, 96, 96)  # Red
         else:
             bg_rgb = (255, 255, 255)  # White (default)
         
@@ -302,8 +296,8 @@ def generate():
         layout_width = 1200
         layout_height = 1800
         
-        passport_width = 300
-        passport_height = 400
+        passport_width = 280
+        passport_height = 380
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
@@ -333,7 +327,7 @@ def generate():
         rows = 4
         
         # Calculate spacing with minimum gap between photos
-        min_gap = 20
+        min_gap = 10
         total_photo_width = cols * passport_width
         total_photo_height = rows * passport_height
         available_width = layout_width - total_photo_width
@@ -422,8 +416,8 @@ def generate_android():
         layout_width = 1200
         layout_height = 1800
         
-        passport_width = 300
-        passport_height = 400
+        passport_width = 280
+        passport_height = 380
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
@@ -453,7 +447,7 @@ def generate_android():
         rows = 4
         
         # Calculate spacing with minimum gap between photos
-        min_gap = 20
+        min_gap = 10
         total_photo_width = cols * passport_width
         total_photo_height = rows * passport_height
         available_width = layout_width - total_photo_width

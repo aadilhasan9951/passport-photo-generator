@@ -20,9 +20,6 @@ class PreviewActivity : AppCompatActivity() {
     private lateinit var rgBgColor: RadioGroup
     private lateinit var rbWhite: RadioButton
     private lateinit var rbBlue: RadioButton
-    private lateinit var rbGreen: RadioButton
-    private lateinit var rbPurple: RadioButton
-    private lateinit var rbRed: RadioButton
     private lateinit var btnGenerate: Button
     private lateinit var btnAdjustCrop: Button
     private lateinit var btnChangePhoto: Button
@@ -38,9 +35,6 @@ class PreviewActivity : AppCompatActivity() {
         rgBgColor = findViewById(R.id.rgBgColor)
         rbWhite = findViewById(R.id.rbWhite)
         rbBlue = findViewById(R.id.rbBlue)
-        rbGreen = findViewById(R.id.rbGreen)
-        rbPurple = findViewById(R.id.rbPurple)
-        rbRed = findViewById(R.id.rbRed)
         btnGenerate = findViewById(R.id.btnGenerate)
         btnAdjustCrop = findViewById(R.id.btnAdjustCrop)
         btnChangePhoto = findViewById(R.id.btnChangePhoto)
@@ -81,9 +75,6 @@ class PreviewActivity : AppCompatActivity() {
         val bgColor = when {
             rbWhite.isChecked -> "white"
             rbBlue.isChecked -> "blue"
-            rbGreen.isChecked -> "green"
-            rbPurple.isChecked -> "purple"
-            rbRed.isChecked -> "red"
             else -> "white"
         }
         
