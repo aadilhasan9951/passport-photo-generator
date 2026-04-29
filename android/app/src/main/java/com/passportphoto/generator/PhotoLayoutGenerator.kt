@@ -8,8 +8,8 @@ class PhotoLayoutGenerator {
     
     companion object {
         // Passport photo dimensions at 300 DPI
-        private const val PASSPORT_WIDTH = 280  // Standard passport size
-        private const val PASSPORT_HEIGHT = 380  // Standard passport size
+        private const val PASSPORT_WIDTH = 350  // Standard passport size
+        private const val PASSPORT_HEIGHT = 450  // Standard passport size
         
         // 4x6 inch layout at 300 DPI (portrait)
         private const val LAYOUT_WIDTH = 1200   // 4 inches

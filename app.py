@@ -296,8 +296,8 @@ def generate():
         layout_width = 1200
         layout_height = 1800
         
-        passport_width = 280
-        passport_height = 380
+        passport_width = 350
+        passport_height = 450
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
@@ -416,8 +416,8 @@ def generate_android():
         layout_width = 1200
         layout_height = 1800
         
-        passport_width = 280
-        passport_height = 380
+        passport_width = 350
+        passport_height = 450
         
         # Resize passport photo to correct size
         passport_img = final_img.resize((passport_width, passport_height), Image.Resampling.LANCZOS)
