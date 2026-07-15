@@ -1,0 +1,6 @@
+.git
+.venv
+android
+temp/*
+__pycache__
+*.pyc
