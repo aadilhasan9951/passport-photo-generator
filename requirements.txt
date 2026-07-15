@@ -1,6 +1,6 @@
 Pillow==12.3.0
 rembg==2.0.69
-onnxruntime==1.27.0
+onnxruntime==1.23.2
 numpy>=2.3.0
 opencv-python-headless==5.0.0.93
 flask==3.1.0
