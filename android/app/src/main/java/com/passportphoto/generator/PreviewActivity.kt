@@ -11,18 +11,18 @@ import java.io.FileOutputStream
 
 class PreviewActivity : AppCompatActivity() {
 
-    private lateinit var ivPreview: ImageView
-    private lateinit var rgBgColor: RadioGroup
-    private lateinit var rbWhite: RadioButton
-    private lateinit var rbBlue: RadioButton
-    private lateinit var btnGenerate: Button
-    private lateinit var btnAdjustCrop: Button
-    private lateinit var btnChangePhoto: Button
-    private lateinit var etServerUrl: EditText
-    private lateinit var seekSmoothness: SeekBar
-    private lateinit var seekBrightness: SeekBar
-    private lateinit var tvSmoothnessVal: TextView
-    private lateinit var tvBrightnessVal: TextView
+    private lateinit var imagePreview: ImageView
+    private lateinit var bgGroup: RadioGroup
+    private lateinit var whiteBtn: RadioButton
+    private lateinit var blueBtn: RadioButton
+    private lateinit var generateBtn: Button
+    private lateinit var adjustBtn: Button
+    private lateinit var changeBtn: Button
+    private lateinit var serverInput: EditText
+    private lateinit var smoothSeek: SeekBar
+    private lateinit var brightSeek: SeekBar
+    private lateinit var smoothText: TextView
+    private lateinit var brightText: TextView
 
     private var imageUri: Uri? = null
     private var originalBitmap: Bitmap? = null
@@ -31,18 +31,18 @@ class PreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preview)
 
-        ivPreview = findViewById(R.id.ivPreview)
-        rgBgColor = findViewById(R.id.rgBgColor)
-        rbWhite = findViewById(R.id.rbWhite)
-        rbBlue = findViewById(R.id.rbBlue)
-        btnGenerate = findViewById(R.id.btnGenerate)
-        btnAdjustCrop = findViewById(R.id.btnAdjustCrop)
-        btnChangePhoto = findViewById(R.id.btnChangePhoto)
-        etServerUrl = findViewById(R.id.etServerUrl)
-        seekSmoothness = findViewById(R.id.seekSmoothness)
-        seekBrightness = findViewById(R.id.seekBrightness)
-        tvSmoothnessVal = findViewById(R.id.tvSmoothnessVal)
-        tvBrightnessVal = findViewById(R.id.tvBrightnessVal)
+        imagePreview = findViewById(R.id.ivPreview)
+        bgGroup = findViewById(R.id.rgBgColor)
+        whiteBtn = findViewById(R.id.rbWhite)
+        blueBtn = findViewById(R.id.rbBlue)
+        generateBtn = findViewById(R.id.btnGenerate)
+        adjustBtn = findViewById(R.id.btnAdjustCrop)
+        changeBtn = findViewById(R.id.btnChangePhoto)
+        serverInput = findViewById(R.id.etServerUrl)
+        smoothSeek = findViewById(R.id.seekSmoothness)
+        brightSeek = findViewById(R.id.seekBrightness)
+        smoothText = findViewById(R.id.tvSmoothnessVal)
+        brightText = findViewById(R.id.tvBrightnessVal)
 
         val uriString = intent.getStringExtra("imageUri")
         imageUri = uriString?.let { Uri.parse(it) }
@@ -50,30 +50,30 @@ class PreviewActivity : AppCompatActivity() {
         imageUri?.let {
             val inputStream = contentResolver.openInputStream(it)
             originalBitmap = BitmapFactory.decodeStream(inputStream)
-            originalBitmap?.let { bm -> ivPreview.setImageBitmap(bm) }
+            originalBitmap?.let { bm -> imagePreview.setImageBitmap(bm) }
         }
 
-        seekSmoothness.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        smoothSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(sb: SeekBar?, progress: Int, fromUser: Boolean) {
-                tvSmoothnessVal.text = progress.toString()
+                smoothText.text = progress.toString()
                 if (fromUser) updatePreview()
             }
             override fun onStartTrackingTouch(sb: SeekBar?) {}
             override fun onStopTrackingTouch(sb: SeekBar?) {}
         })
 
-        seekBrightness.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        brightSeek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(sb: SeekBar?, progress: Int, fromUser: Boolean) {
-                tvBrightnessVal.text = (progress + 50).toString()
+                brightText.text = (progress + 50).toString()
                 if (fromUser) updatePreview()
             }
             override fun onStartTrackingTouch(sb: SeekBar?) {}
             override fun onStopTrackingTouch(sb: SeekBar?) {}
         })
 
-        btnGenerate.setOnClickListener { generatePassportPhoto() }
-        btnAdjustCrop.setOnClickListener { finish() }
-        btnChangePhoto.setOnClickListener {
+        generateBtn.setOnClickListener { generatePassportPhoto() }
+        adjustBtn.setOnClickListener { finish() }
+        changeBtn.setOnClickListener {
             val mainIntent = Intent(this, MainActivity::class.java)
             mainIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(mainIntent)
@@ -82,72 +82,63 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun updatePreview() {
         val original = originalBitmap ?: return
-        val smoothness = seekSmoothness.progress
-        val brightness = seekBrightness.progress + 50
+        val smoothness = smoothSeek.progress
+        val brightness = brightSeek.progress + 50
 
         var result = original.copy(Bitmap.Config.ARGB_8888, true)
 
         if (smoothness > 0) {
-            result = blur(result, smoothness)
+            val scale = smoothness / 100f
+            val factor = (1f - scale * 0.5f).coerceIn(0.2f, 1f)
+            val sw = (original.width * factor).toInt().coerceAtLeast(1)
+            val sh = (original.height * factor).toInt().coerceAtLeast(1)
+            val small = Bitmap.createScaledBitmap(original, sw, sh, true)
+            result = Bitmap.createScaledBitmap(small, original.width, original.height, true)
         }
+
         if (brightness != 100) {
-            result = adjustBrightness(result, brightness)
+            val factor = brightness / 100f
+            val canvas = Canvas(result)
+            val paint = Paint()
+            val cm = ColorMatrix().apply {
+                set(floatArrayOf(
+                    factor, 0f, 0f, 0f, 0f,
+                    0f, factor, 0f, 0f, 0f,
+                    0f, 0f, factor, 0f, 0f,
+                    0f, 0f, 0f, 1f, 0f
+                ))
+            }
+            paint.colorFilter = ColorMatrixColorFilter(cm)
+            canvas.drawBitmap(original, 0f, 0f, paint)
         }
-        ivPreview.setImageBitmap(result)
-    }
 
-    private fun adjustBrightness(bitmap: Bitmap, value: Int): Bitmap {
-        val factor = value / 100f
-        val result = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        val canvas = Canvas(result)
-        val paint = Paint()
-        val cm = ColorMatrix().apply {
-            set(floatArrayOf(
-                factor, 0f, 0f, 0f, 0f,
-                0f, factor, 0f, 0f, 0f,
-                0f, 0f, factor, 0f, 0f,
-                0f, 0f, 0f, 1f, 0f
-            ))
-        }
-        paint.colorFilter = ColorMatrixColorFilter(cm)
-        canvas.drawBitmap(bitmap, 0f, 0f, paint)
-        return result
-    }
-
-    private fun blur(bitmap: Bitmap, level: Int): Bitmap {
-        val scale = level / 100f
-        val factor = (1f - scale * 0.5f).coerceIn(0.2f, 1f)
-        val sw = (bitmap.width * factor).toInt().coerceAtLeast(1)
-        val sh = (bitmap.height * factor).toInt().coerceAtLeast(1)
-        val small = Bitmap.createScaledBitmap(bitmap, sw, sh, true)
-        return Bitmap.createScaledBitmap(small, bitmap.width, bitmap.height, true)
+        imagePreview.setImageBitmap(result)
     }
 
     private fun generatePassportPhoto() {
-        val serverUrl = etServerUrl.text.toString().trim()
+        val serverUrl = serverInput.text.toString().trim()
         if (serverUrl.isEmpty()) {
             Toast.makeText(this, "Enter server URL first", Toast.LENGTH_SHORT).show()
             return
         }
 
-        btnGenerate.isEnabled = false
-        btnGenerate.text = "Processing..."
+        generateBtn.isEnabled = false
+        generateBtn.text = "Processing..."
 
         val bgColor = when {
-            rbWhite.isChecked -> "white"
-            rbBlue.isChecked -> "blue"
-            else -> "white"
+            whiteBtn.isChecked -> "white"
+            else -> "blue"
         }
 
         val apiService = ApiService(serverUrl)
         apiService.generatePassportPhoto(
             originalBitmap!!, bgColor,
-            seekSmoothness.progress,
-            seekBrightness.progress + 50
+            smoothSeek.progress,
+            brightSeek.progress + 50
         ) { resultBitmap ->
             runOnUiThread {
-                btnGenerate.isEnabled = true
-                btnGenerate.text = "Generate Passport Photo"
+                generateBtn.isEnabled = true
+                generateBtn.text = "Generate Passport Photo"
             }
             if (resultBitmap != null) {
                 val layoutUri = saveBitmapToTempFile(resultBitmap)
