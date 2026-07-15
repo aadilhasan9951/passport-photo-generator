@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    tools:context=".CropActivity">
+    android:background="@drawable/gradient_background">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Adjust Crop Area"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         android:gravity="center"
@@ -27,12 +25,12 @@
         android:id="@+id/tvHint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Drag the box to move, drag corners/edges to resize"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Drag box to move, drag corners to resize"
         android:textSize="14sp"
-        android:textColor="@android:color/white"
+        android:textColor="#99FFFFFF"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +47,8 @@
         app:layout_constraintTop_toBottomOf="@id/tvHint"
         app:cropAspectRatioX="35"
         app:cropAspectRatioY="45"
-        app:cropAutoZoomEnabled="true" />
+        app:cropAutoZoomEnabled="true"
+        app:cropGuidelines="on" />
 
     <LinearLayout
         android:id="@+id/llButtons"
@@ -58,7 +57,7 @@
         android:layout_margin="16dp"
         android:orientation="vertical"
         android:background="@drawable/button_wrapper_bg"
-        android:padding="20dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -66,30 +65,31 @@
         <Button
             android:id="@+id/btnDone"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:layout_marginBottom="8dp"
             android:text="Done"
-            android:backgroundTint="#667eea"
-            android:textSize="16sp" />
+            android:backgroundTint="#6C63FF"
+            android:textSize="15sp"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnAutoDetect"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:layout_marginBottom="8dp"
             android:text="Auto Detect"
-            android:backgroundTint="#f1f1f1"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:backgroundTint="#2a2a4a"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="52dp"
             android:text="Cancel"
-            android:backgroundTint="#f1f1f1"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:backgroundTint="#2a2a4a"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
