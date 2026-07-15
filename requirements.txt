@@ -3,4 +3,4 @@ rembg==2.0.50
 onnxruntime==1.15.0
 numpy==1.24.3
 opencv-python-headless==4.8.0.76
-gradio
+gradio==6.20.0
