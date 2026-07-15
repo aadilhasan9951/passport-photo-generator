@@ -1,99 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
-    tools:context=".PreviewActivity">
+    android:background="#1a1a2e">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Crop Preview"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
+            android:text="Passport Photo"
+            android:textSize="22sp"
+            android:textColor="#ffffff"
             android:textStyle="bold"
             android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="16dp" />
 
         <TextView
-            android:id="@+id/tvServerLabel"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Server URL:"
+            android:text="Server URL"
             android:textSize="14sp"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+            android:textColor="#aaaaaa" />
 
         <EditText
             android:id="@+id/etServerUrl"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:text="https://aadil070-passport-photo-free.hf.space"
             android:inputType="textUri"
             android:textSize="14sp"
-            android:background="@android:color/white"
+            android:background="#ffffff"
             android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvServerLabel" />
+            android:layout_marginBottom="12dp" />
 
         <ImageView
             android:id="@+id/ivPreview"
-            android:layout_width="0dp"
-            android:layout_height="250dp"
-            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
             android:scaleType="fitCenter"
-            android:background="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etServerUrl" />
+            android:background="#ffffff"
+            android:layout_marginBottom="12dp" />
 
         <TextView
-            android:id="@+id/tvBgLabel"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="12dp"
-            android:text="Background Color:"
+            android:text="Background Color"
             android:textSize="16sp"
-            android:textColor="@android:color/white"
+            android:textColor="#ffffff"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivPreview" />
+            android:layout_marginBottom="8dp" />
 
         <RadioGroup
             android:id="@+id/rgBgColor"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBgLabel">
+            android:layout_marginBottom="16dp">
 
             <RadioButton
                 android:id="@+id/rbWhite"
@@ -101,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="White"
+                android:textColor="#ffffff"
                 android:checked="true"
                 android:textSize="14sp" />
 
@@ -110,35 +79,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Light Blue"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
 
         </RadioGroup>
 
         <TextView
-            android:id="@+id/tvSmoothnessLabel"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Smoothness:"
-            android:textSize="14sp"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rgBgColor" />
+            android:text="Smoothness"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/llSmoothness"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSmoothnessLabel">
+            android:layout_marginBottom="16dp">
 
             <SeekBar
                 android:id="@+id/seekSmoothness"
@@ -146,45 +106,37 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="100"
-                android:progress="0" />
+                android:progress="0"
+                android:thumbTint="#38ef7d"
+                android:progressTint="#38ef7d" />
 
             <TextView
                 android:id="@+id/tvSmoothnessVal"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textColor="#38ef7d"
                 android:textStyle="bold"
                 android:gravity="center" />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tvBrightnessLabel"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:text="Brightness:"
-            android:textSize="14sp"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llSmoothness" />
+            android:text="Brightness"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:id="@+id/llBrightness"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBrightnessLabel">
+            android:layout_marginBottom="16dp">
 
             <SeekBar
                 android:id="@+id/seekBrightness"
@@ -192,59 +144,49 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:max="100"
-                android:progress="50" />
+                android:progress="50"
+                android:thumbTint="#11998e"
+                android:progressTint="#11998e" />
 
             <TextView
                 android:id="@+id/tvBrightnessVal"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="100"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textColor="#11998e"
                 android:textStyle="bold"
                 android:gravity="center" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/llButtons"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/llBrightness">
+        <Button
+            android:id="@+id/btnGenerate"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Generate Passport Photo"
+            android:backgroundTint="#11998e"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
 
-            <Button
-                android:id="@+id/btnGenerate"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginBottom="8dp"
-                android:text="Generate Passport Photo"
-                android:backgroundTint="#11998e"
-                android:textSize="16sp" />
+        <Button
+            android:id="@+id/btnAdjustCrop"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Adjust Crop"
+            android:backgroundTint="#667eea"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
 
-            <Button
-                android:id="@+id/btnAdjustCrop"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginBottom="8dp"
-                android:text="Adjust Crop"
-                android:backgroundTint="#667eea"
-                android:textSize="16sp" />
+        <Button
+            android:id="@+id/btnChangePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Change Photo"
+            android:backgroundTint="#333333"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/btnChangePhoto"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Change Photo"
-                android:backgroundTint="#f1f1f1"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </ScrollView>
