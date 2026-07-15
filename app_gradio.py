@@ -99,7 +99,6 @@ demo = gr.Interface(
     outputs=gr.Image(type="pil", label="Passport Photo Sheet (4x6)"),
     title="Passport Photo 4x6 Generator",
     description="Upload a photo, adjust smoothness/brightness, and get a print-ready 4x6 passport photo sheet.",
-    allow_flagging="never",
 )
 
 if __name__ == "__main__":
