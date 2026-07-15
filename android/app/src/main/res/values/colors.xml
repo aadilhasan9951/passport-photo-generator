@@ -10,5 +10,6 @@
     <color name="text_secondary">#99FFFFFF</color>
     <color name="text_muted">#66FFFFFF</color>
     <color name="surface">#FFFFFF</color>
+    <color name="purple_500">#6C63FF</color>
     <color name="error">#FF6B6B</color>
 </resources>
