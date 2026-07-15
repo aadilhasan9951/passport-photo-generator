@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PassportPhotoGenerator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/secondary</item>
-        <item name="android:statusBarColor">@color/bg_dark</item>
-        <item name="android:navigationBarColor">@color/bg_dark</item>
-        <item name="android:windowBackground">@color/bg_dark</item>
+    <style name="Theme.PassportPhotoGenerator" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#6C63FF</item>
+        <item name="colorPrimaryDark">#5A52D5</item>
+        <item name="colorAccent">#00D4AA</item>
+        <item name="android:statusBarColor">#0a0a1a</item>
+        <item name="android:navigationBarColor">#0a0a1a</item>
+        <item name="android:windowBackground">#0a0a1a</item>
     </style>
 </resources>
