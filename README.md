@@ -3,9 +3,7 @@ title: Passport Photo Generator
 emoji: 📸
 colorFrom: blue
 colorTo: indigo
-sdk: gradio
-sdk_version: 6.20.0
-app_file: app_gradio.py
+sdk: docker
 pinned: false
 short_description: Free passport photo generator
 ---

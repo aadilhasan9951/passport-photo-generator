@@ -3,4 +3,6 @@ rembg==2.0.76
 onnxruntime==1.27.0
 numpy>=2.3.0
 opencv-python-headless==5.0.0.93
-gradio==6.20.0
+flask==3.1.0
+flask-cors==5.0.1
+gunicorn==23.0.0
